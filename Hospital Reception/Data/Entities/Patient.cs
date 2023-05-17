@@ -15,8 +15,8 @@ namespace Data.Entities
         public char Gender { get; set; }
         public string PhoneNumber { get; set; }
         public bool IsUrgent { get; set; }
-        public DateTime DateOfAdmission { get; set; }
-        public DateTime? DateOfDischarge { get; set; }
+        public DateTime AppointmentDate { get; set; }
+        public DateTime AppointmentTime { get; set; }
 
         public int Doctor_Id { get; set; }
         public Doctor Doctor { get; set; }

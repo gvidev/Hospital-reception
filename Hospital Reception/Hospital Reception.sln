@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{D5A103AA-B038-41DB-8372-314BD30E8E3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{720AA272-4D62-4136-82BE-7E87043A2204}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{D5A103AA-B038-41DB-8372-314BD30E8E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5A103AA-B038-41DB-8372-314BD30E8E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5A103AA-B038-41DB-8372-314BD30E8E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{720AA272-4D62-4136-82BE-7E87043A2204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{720AA272-4D62-4136-82BE-7E87043A2204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{720AA272-4D62-4136-82BE-7E87043A2204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{720AA272-4D62-4136-82BE-7E87043A2204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D5A103AA-B038-41DB-8372-314BD30E8E3A} = {9D955C8B-D9CB-4EB6-BD4D-E64237474622}
+		{720AA272-4D62-4136-82BE-7E87043A2204} = {9D955C8B-D9CB-4EB6-BD4D-E64237474622}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC00E185-3D99-4704-9E4F-1DC51725AED3}
