@@ -1,14 +1,17 @@
-﻿using System;
+﻿using Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Entities
+namespace ApplicationService.DTOs
 {
-    public class Doctor : BaseEntity
+    public class DoctorDTO
     {
+        public int Id { get; set; }
+
         [StringLength(20)]
         public string FirstName { get; set; }
 
@@ -28,8 +31,7 @@ namespace Data.Entities
         public double MonthSalary { get; set; }
 
         public int Hospital_Id { get; set; }
-        public Hospital Hospital { get; set; }
-
+        public HospitalDTO Hospital { get; set; }
 
     }
 }

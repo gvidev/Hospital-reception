@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Entities
+namespace ApplicationService.DTOs
 {
-    public class Hospital : BaseEntity
+    public class HospitalDTO
     {
+        public int Id { get; set; }
+
         [StringLength(50)]
         public string HospitalName { get; set; }
 
@@ -28,6 +30,5 @@ namespace Data.Entities
 
         public int Floors { get; set; }
         public int Capacity { get; set; }
-
     }
 }
