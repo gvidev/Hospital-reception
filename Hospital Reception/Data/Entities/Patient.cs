@@ -16,12 +16,12 @@ namespace Data.Entities
         public string LastName { get; set; }
 
         public int Age { get; set; }
-        public char Gender { get; set; }
+        public char? Gender { get; set; }
 
         [StringLength(10)]
         public string PhoneNumber { get; set; }
 
-        public bool IsUrgent { get; set; }
+        public bool? IsUrgent { get; set; }
         public DateTime? AppointmentDate { get; set; }
 
         public int Doctor_Id { get; set; }

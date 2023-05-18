@@ -27,9 +27,7 @@ namespace ApplicationService.Implementations
                         FirstName = item.FirstName,
                         LastName = item.LastName,
                         Age = item.Age,
-                        Gender = item.Gender,
                         PhoneNumber = item.PhoneNumber,
-                        IsUrgent = item.IsUrgent,
                         Doctor = new DoctorDTO
                         {
                             Id = item.Doctor.Id,
@@ -56,10 +54,7 @@ namespace ApplicationService.Implementations
                         FirstName = patient.FirstName,
                         LastName = patient.LastName,
                         Age = patient.Age,
-                        Gender = patient.Gender,
                         PhoneNumber = patient.PhoneNumber,
-                        IsUrgent = patient.IsUrgent,
-                        AppointmentDate = patient.AppointmentDate,
                         // you can create a search for this object based on NationalityId and load it here
                         Doctor = new DoctorDTO
                         {
@@ -86,10 +81,7 @@ namespace ApplicationService.Implementations
                 FirstName = patientDTO.FirstName,
                 LastName = patientDTO.LastName,
                 Age = patientDTO.Age,
-                Gender = patientDTO.Gender,
                 PhoneNumber = patientDTO.PhoneNumber,
-                IsUrgent = patientDTO.IsUrgent,
-                AppointmentDate= patientDTO.AppointmentDate,
                 Doctor_Id = patientDTO.Doctor_Id,
             };
 

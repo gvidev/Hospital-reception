@@ -26,8 +26,8 @@ namespace Data.Entities
         [StringLength(60)]
         public string Email { get; set; }
 
-        public int Floors { get; set; }
-        public int Capacity { get; set; }
+        public int? Floors { get; set; }
+        public int? Capacity { get; set; }
 
     }
 }

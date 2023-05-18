@@ -28,7 +28,9 @@ namespace ApplicationService.DTOs
         [StringLength(60)]
         public string Email { get; set; }
 
-        public int Floors { get; set; }
-        public int Capacity { get; set; }
+        public bool Validate()
+        {
+            return !String.IsNullOrEmpty(HospitalName);
+        }
     }
 }

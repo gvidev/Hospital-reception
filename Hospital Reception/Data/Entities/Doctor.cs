@@ -16,7 +16,7 @@ namespace Data.Entities
         public string LastName { get; set; }
 
         public int Age { get; set; }
-        public char Gender { get; set; }
+        public char? Gender { get; set; }
 
         [StringLength(20)]
         public string Specialization { get; set; }
@@ -24,8 +24,8 @@ namespace Data.Entities
         [StringLength(10)]
         public string PhoneNumber { get; set; }
 
-        public int YearsOfExperiance { get; set; }
-        public double MonthSalary { get; set; }
+        public int? YearsOfExperiance { get; set; }
+        public double? MonthSalary { get; set; }
 
         public int Hospital_Id { get; set; }
         public Hospital Hospital { get; set; }

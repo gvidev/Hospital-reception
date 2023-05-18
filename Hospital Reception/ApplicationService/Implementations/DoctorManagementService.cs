@@ -26,7 +26,6 @@ namespace ApplicationService.Implementations
                         FirstName = item.FirstName,
                         LastName = item.LastName,
                         Age = item.Age,
-                        Gender = item.Gender,
                         PhoneNumber = item.PhoneNumber,
                         Hospital = new HospitalDTO
                         {
@@ -54,7 +53,6 @@ namespace ApplicationService.Implementations
                         FirstName = doctor.FirstName,
                         LastName = doctor.LastName,
                         Age = doctor.Age,
-                        Gender = doctor.Gender,
                         PhoneNumber = doctor.PhoneNumber,
                         Hospital = new HospitalDTO
                         {
@@ -82,7 +80,6 @@ namespace ApplicationService.Implementations
                 FirstName = doctorDTO.FirstName,
                 LastName = doctorDTO.LastName,
                 Age = doctorDTO.Age,
-                Gender = doctorDTO.Gender,
                 PhoneNumber = doctorDTO.PhoneNumber,
                 Hospital_Id = doctorDTO.Hospital_Id
             };

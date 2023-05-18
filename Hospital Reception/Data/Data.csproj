@@ -56,12 +56,28 @@
     <Compile Include="Entities\Doctor.cs" />
     <Compile Include="Entities\Hospital.cs" />
     <Compile Include="Entities\Patient.cs" />
+    <Compile Include="Migrations\202305181515242_Initial.cs" />
+    <Compile Include="Migrations\202305181515242_Initial.designer.cs">
+      <DependentUpon>202305181515242_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202305181541391_Second.cs" />
+    <Compile Include="Migrations\202305181541391_Second.designer.cs">
+      <DependentUpon>202305181541391_Second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202305181515242_Initial.resx">
+      <DependentUpon>202305181515242_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202305181541391_Second.resx">
+      <DependentUpon>202305181541391_Second.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
