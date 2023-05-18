@@ -49,6 +49,7 @@ namespace ApplicationService.Implementations
                 {
                     hospitalDTO = new HospitalDTO
                     {
+                        Id = hospital.Id,
                         HospitalName = hospital.HospitalName,
                         Address = hospital.Address,
                         AddressNumber = hospital.AddressNumber,
@@ -64,11 +65,46 @@ namespace ApplicationService.Implementations
 
         }
 
+        public bool Update(HospitalDTO hospitalDTO)
+        {
+            try
+            {
+
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    Hospital hospital = unitOfWork.HospitalRepository.GetByID(hospitalDTO.Id);
+
+                    if(hospital == null)
+                    {
+                        return false;
+                    }
+
+                    // Update the hospital entity with the new values
+                    hospital.HospitalName = hospitalDTO.HospitalName;
+                    hospital.Address = hospitalDTO.Address;
+                    hospital.AddressNumber = hospitalDTO.AddressNumber;
+                    hospital.City = hospitalDTO.City;
+                    hospital.ContactNumber = hospitalDTO.ContactNumber;
+                    hospital.Email = hospitalDTO.Email;
+
+                    unitOfWork.HospitalRepository.Update(hospital);
+                    unitOfWork.Save();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Save(HospitalDTO hospitalDTO)
         {
 
             Hospital hospital = new Hospital
             {
+                Id = hospitalDTO.Id,
                 HospitalName = hospitalDTO.HospitalName,
                 Address = hospitalDTO.Address,
                 AddressNumber = hospitalDTO.AddressNumber,
@@ -89,7 +125,6 @@ namespace ApplicationService.Implementations
             }
             catch
             {
-                Console.WriteLine(hospital);
                 return false;
             }
         }

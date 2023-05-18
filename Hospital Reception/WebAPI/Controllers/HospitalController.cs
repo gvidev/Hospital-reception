@@ -27,6 +27,26 @@ namespace WebAPI.Controllers
             return Json(hospitalService.GetById(id));
         }
 
+        [HttpPut]
+        public IHttpActionResult Update(HospitalDTO hospitalDto)
+        {
+            ResponseMessage response = new ResponseMessage();
+
+            if (hospitalService.Update(hospitalDto))
+            {
+                response.Code = 200;
+                response.Body = "Hospital is updated.";
+            }
+            else
+            {
+                response.Code = 500;
+                response.Body = "Hospital is not updated.";
+            }
+
+            return Json(response);
+        }
+
+
         [HttpPost]
         public IHttpActionResult Save(HospitalDTO hospitalDto)
         {

@@ -69,6 +69,39 @@ namespace ApplicationService.Implementations
             return patientDTO;
         }
 
+        public bool Update(PatientDTO patientDTO)
+        {
+            try
+            {
+
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    Patient patient = unitOfWork.PatientRepository.GetByID(patientDTO.Id);
+
+                    if (patient == null)
+                    {
+                        return false;
+                    }
+
+                    // Update the hospital entity with the new values
+                    patient.FirstName = patientDTO.FirstName;
+                    patient.LastName = patientDTO.LastName;
+                    patient.Age = patientDTO.Age;
+                    patient.PhoneNumber = patientDTO.PhoneNumber;
+                    patient.Doctor_Id = patientDTO.Doctor_Id;
+
+                    unitOfWork.PatientRepository.Update(patient);
+                    unitOfWork.Save();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Save(PatientDTO patientDTO)
         {
             if (patientDTO.Doctor_Id == 0)
@@ -106,7 +139,7 @@ namespace ApplicationService.Implementations
         {
             try
             {
-                using(UnitOfWork unitOfWork =new UnitOfWork())
+                using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
                     Patient patient = unitOfWork.PatientRepository.GetByID(id);
                     unitOfWork.PatientRepository.Delete(patient);

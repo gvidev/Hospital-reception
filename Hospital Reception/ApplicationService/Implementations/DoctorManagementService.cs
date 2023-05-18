@@ -68,6 +68,40 @@ namespace ApplicationService.Implementations
         }
 
 
+        public bool Update(DoctorDTO doctorDTO)
+        {
+            try
+            {
+
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    Doctor doctor = unitOfWork.DoctorRepository.GetByID(doctorDTO.Id);
+
+                    if (doctor == null)
+                    {
+                        return false;
+                    }
+
+                    // Update the hospital entity with the new values
+                    doctor.FirstName = doctorDTO.FirstName;
+                    doctor.LastName = doctorDTO.LastName;
+                    doctor.Age = doctorDTO.Age;
+                    doctor.PhoneNumber = doctorDTO.PhoneNumber;
+                    doctor.Hospital_Id = doctorDTO.Hospital_Id;
+                    
+
+                    unitOfWork.DoctorRepository.Update(doctor);
+                    unitOfWork.Save();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Save(DoctorDTO doctorDTO)
         {
             if (doctorDTO.Hospital_Id == 0)
