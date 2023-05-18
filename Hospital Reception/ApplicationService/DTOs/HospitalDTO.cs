@@ -28,6 +28,7 @@ namespace ApplicationService.DTOs
         [StringLength(60)]
         public string Email { get; set; }
 
+        //not implemented correctly yet
         public bool Validate()
         {
             return !String.IsNullOrEmpty(HospitalName);

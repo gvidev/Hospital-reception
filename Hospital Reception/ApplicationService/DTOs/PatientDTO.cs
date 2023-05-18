@@ -26,6 +26,12 @@ namespace ApplicationService.DTOs
         public int Doctor_Id { get; set; }
         public DoctorDTO Doctor { get; set; }
 
+        //not implemented correctly yet
+        public bool Validate()
+        {
+            return !String.IsNullOrEmpty(FirstName);
+        }
+
 
 
     }
