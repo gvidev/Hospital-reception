@@ -27,11 +27,7 @@ namespace ApplicationService.Implementations
                         LastName = item.LastName,
                         Age = item.Age,
                         PhoneNumber = item.PhoneNumber,
-                        Hospital = new HospitalDTO
-                        {
-                            Id = item.Hospital.Id,
-                            HospitalName = item.Hospital.HospitalName
-                        }
+                        Hospital_Id = item.Hospital_Id
                     });
                 }
             }
