@@ -23,6 +23,15 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
+            ResponseMessage response = new ResponseMessage();
+
+            if (!(patientService.GetById(id).Validate()))
+            {
+                response.Code = 500;
+                response.Body = $"Patient with ID:{id} is not found.";
+                return Json(response);
+            }
+
             return Json(patientService.GetById(id));
         }
 
@@ -34,12 +43,12 @@ namespace WebAPI.Controllers
             if (patientService.Update(patientDTO))
             {
                 response.Code = 200;
-                response.Body = "Hospital is updated.";
+                response.Body = "Patient is updated.";
             }
             else
             {
                 response.Code = 500;
-                response.Body = "Hospital is not updated.";
+                response.Body = "Patient is not updated.";
             }
 
             return Json(response);
@@ -56,12 +65,12 @@ namespace WebAPI.Controllers
             if (patientService.Save(patientDTO))
             {
                 response.Code = 200;
-                response.Body = "Hospital is saved.";
+                response.Body = "Patient is saved.";
             }
             else
             {
                 response.Code = 500;
-                response.Body = "Hospital is not saved.";
+                response.Body = "Patient is not saved.";
             }
 
             return Json(response);
@@ -75,12 +84,12 @@ namespace WebAPI.Controllers
             if (patientService.Delete(id))
             {
                 response.Code = 200;
-                response.Body = "Hospital is deleted.";
+                response.Body = "Patient is deleted.";
             }
             else
             {
                 response.Code = 500;
-                response.Body = "Hospital is not deleted.";
+                response.Body = "Patient is not deleted.";
             }
 
             return Json(response);

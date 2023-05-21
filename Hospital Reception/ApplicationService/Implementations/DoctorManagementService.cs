@@ -20,6 +20,7 @@ namespace ApplicationService.Implementations
             {
                 foreach (var item in unitOfWork.DoctorRepository.Get())
                 {
+
                     doctorsDTO.Add(new DoctorDTO
                     {
                         Id = item.Id,
@@ -46,15 +47,12 @@ namespace ApplicationService.Implementations
                 {
                     doctorDTO = new DoctorDTO
                     {
+                        Id = doctor.Id,
                         FirstName = doctor.FirstName,
                         LastName = doctor.LastName,
                         Age = doctor.Age,
                         PhoneNumber = doctor.PhoneNumber,
-                        Hospital = new HospitalDTO
-                        {
-                            Id = doctor.Hospital.Id,
-                            HospitalName = doctor.Hospital.HospitalName
-                        }
+                        Hospital_Id = doctor.Hospital_Id
 
                     };
 
@@ -66,6 +64,11 @@ namespace ApplicationService.Implementations
 
         public bool Update(DoctorDTO doctorDTO)
         {
+            if (!HospitalCheck(doctorDTO.Hospital_Id))
+            {
+                return false;
+            }
+
             try
             {
 
@@ -77,14 +80,13 @@ namespace ApplicationService.Implementations
                     {
                         return false;
                     }
-
-                    // Update the hospital entity with the new values
-                    doctor.FirstName = doctorDTO.FirstName;
+                        // Update the hospital entity with the new values
+                        doctor.FirstName = doctorDTO.FirstName;
                     doctor.LastName = doctorDTO.LastName;
                     doctor.Age = doctorDTO.Age;
                     doctor.PhoneNumber = doctorDTO.PhoneNumber;
                     doctor.Hospital_Id = doctorDTO.Hospital_Id;
-                    
+
 
                     unitOfWork.DoctorRepository.Update(doctor);
                     unitOfWork.Save();
@@ -100,7 +102,7 @@ namespace ApplicationService.Implementations
 
         public bool Save(DoctorDTO doctorDTO)
         {
-            if (doctorDTO.Hospital_Id == 0)
+            if (!HospitalCheck(doctorDTO.Hospital_Id))
             {
                 return false;
             }
@@ -116,14 +118,15 @@ namespace ApplicationService.Implementations
 
             try
             {
-                using(UnitOfWork unitOfWork = new UnitOfWork())
+                using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
                     unitOfWork.DoctorRepository.Insert(doctor);
                     unitOfWork.Save();
                 }
                 return true;
             }
-            catch{
+            catch
+            {
                 Console.WriteLine(doctor);
                 return false;
             }
@@ -134,7 +137,7 @@ namespace ApplicationService.Implementations
         {
             try
             {
-                using(UnitOfWork unitOfWork = new UnitOfWork())
+                using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
                     Doctor doctor = unitOfWork.DoctorRepository.GetByID(id);
                     unitOfWork.DoctorRepository.Delete(doctor);
@@ -146,6 +149,24 @@ namespace ApplicationService.Implementations
             {
                 return false;
             }
+        }
+
+        private bool HospitalCheck(int id)
+        {
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    Hospital hospital = unitOfWork.HospitalRepository.GetByID(id);
+                    if (hospital == null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            catch
+            { return false; }
         }
 
     }

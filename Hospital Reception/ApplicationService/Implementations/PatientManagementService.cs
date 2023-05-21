@@ -28,12 +28,7 @@ namespace ApplicationService.Implementations
                         LastName = item.LastName,
                         Age = item.Age,
                         PhoneNumber = item.PhoneNumber,
-                        Doctor = new DoctorDTO
-                        {
-                            Id = item.Doctor.Id,
-                            FirstName = item.Doctor.FirstName,
-                            LastName = item.Doctor.LastName
-                        }
+                        Doctor_Id = item.Doctor_Id,
                     });
                 }
             }
@@ -51,17 +46,13 @@ namespace ApplicationService.Implementations
                 {
                     patientDTO = new PatientDTO
                     {
+                        Id = patient.Id,
                         FirstName = patient.FirstName,
                         LastName = patient.LastName,
                         Age = patient.Age,
                         PhoneNumber = patient.PhoneNumber,
-                        // you can create a search for this object based on NationalityId and load it here
-                        Doctor = new DoctorDTO
-                        {
-                            Id = patient.Doctor.Id,
-                            FirstName = patient.Doctor.FirstName,
-                            LastName = patient.Doctor.LastName,
-                        }
+                        Doctor_Id = patient.Doctor_Id
+                        
                     };
 
                 }
@@ -71,6 +62,12 @@ namespace ApplicationService.Implementations
 
         public bool Update(PatientDTO patientDTO)
         {
+
+            if (!DoctorCheck(patientDTO.Doctor_Id))
+            {
+                return false;
+            }
+
             try
             {
 
@@ -104,7 +101,7 @@ namespace ApplicationService.Implementations
 
         public bool Save(PatientDTO patientDTO)
         {
-            if (patientDTO.Doctor_Id == 0)
+            if(!DoctorCheck(patientDTO.Doctor_Id)) 
             {
                 return false;
             }
@@ -148,6 +145,31 @@ namespace ApplicationService.Implementations
                 return true;
             }
             catch { return false; }
+        }
+
+        private bool DoctorCheck(int id)
+        {
+
+            try
+            {
+                using(UnitOfWork unitOfWork = new UnitOfWork())
+                {
+
+                    Doctor doctor = unitOfWork.DoctorRepository.GetByID(id);
+                    if(doctor == null)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+
+            }
+            catch
+            {
+                return false;
+            }
+
+
         }
 
     }

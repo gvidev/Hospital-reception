@@ -24,6 +24,12 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
+            ResponseMessage response = new ResponseMessage();
+            if (!(hospitalService.GetById(id).Validate())){
+                response.Code = 500;
+                response.Body = $"Hospital with ID:{id} is not found.";
+                return Json(response);
+            }
             return Json(hospitalService.GetById(id));
         }
 

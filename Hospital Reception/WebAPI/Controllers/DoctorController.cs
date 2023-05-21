@@ -24,6 +24,13 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id) 
         {
+            ResponseMessage response = new ResponseMessage();
+            if (!(doctorService.GetById(id).Validate()))
+            {
+                response.Code = 500;
+                response.Body = $"Doctor with ID:{id} is not found.";
+                return Json(response);
+            }
             return Json(doctorService.GetById(id));
         }
 
@@ -36,12 +43,12 @@ namespace WebAPI.Controllers
             if (doctorService.Update(doctorDTO))
             {
                 response.Code = 200;
-                response.Body = "Hospital is updated.";
+                response.Body = "Doctor is updated.";
             }
             else
             {
                 response.Code = 500;
-                response.Body = "Hospital is not updated.";
+                response.Body = "Doctor is not updated.";
             }
 
             return Json(response);

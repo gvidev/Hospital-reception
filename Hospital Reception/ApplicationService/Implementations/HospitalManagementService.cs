@@ -60,7 +60,6 @@ namespace ApplicationService.Implementations
                 }
 
             }
-
             return hospitalDTO;
 
         }
@@ -104,7 +103,6 @@ namespace ApplicationService.Implementations
 
             Hospital hospital = new Hospital
             {
-                Id = hospitalDTO.Id,
                 HospitalName = hospitalDTO.HospitalName,
                 Address = hospitalDTO.Address,
                 AddressNumber = hospitalDTO.AddressNumber,
