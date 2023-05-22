@@ -57,7 +57,7 @@ namespace MVC.Controllers
             }
         }
 
-        // api/hospital/create
+        // api/doctor/create
         public ActionResult Create()
         {
             return View();
@@ -96,7 +96,7 @@ namespace MVC.Controllers
             }
         }
 
-        // api/hospital/edit/id
+        // api/doctor/edit/id
         public async Task<ActionResult> Edit(int id)
         {
 
@@ -146,7 +146,7 @@ namespace MVC.Controllers
             }
         }
 
-        // api/hospital/id
+        // api/doctor/id
         public async Task<ActionResult> Delete(int id)
         {
             // string accessToken = await GetAccessToken();
