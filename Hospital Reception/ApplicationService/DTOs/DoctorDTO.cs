@@ -27,6 +27,7 @@ namespace ApplicationService.DTOs
         public string PhoneNumber { get; set; }
 
         public int Hospital_Id { get; set; }
+        public Hospital Hospital { get; set; }
 
         //not implemented correctly yet
         public bool Validate()

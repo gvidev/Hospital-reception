@@ -29,6 +29,13 @@ namespace ApplicationService.Implementations
                         Age = item.Age,
                         PhoneNumber = item.PhoneNumber,
                         Doctor_Id = item.Doctor_Id,
+                        //Doctor = new DoctorDTO
+                        //{
+                        //    Id = item.Doctor.Id,
+                        //    FirstName = item.Doctor.FirstName,
+                        //    LastName = item.Doctor.LastName
+
+                        //}
                     });
                 }
             }
@@ -51,8 +58,16 @@ namespace ApplicationService.Implementations
                         LastName = patient.LastName,
                         Age = patient.Age,
                         PhoneNumber = patient.PhoneNumber,
-                        Doctor_Id = patient.Doctor_Id
-                        
+                        Doctor_Id = patient.Doctor_Id,
+                        //Doctor = new DoctorDTO
+                        //{ 
+                        //    Id = patient.Doctor.Id,
+                        //    FirstName = patient.Doctor.FirstName,
+                        //    LastName = patient.Doctor.LastName
+
+                        //}
+
+
                     };
 
                 }
@@ -86,6 +101,7 @@ namespace ApplicationService.Implementations
                     patient.Age = patientDTO.Age;
                     patient.PhoneNumber = patientDTO.PhoneNumber;
                     patient.Doctor_Id = patientDTO.Doctor_Id;
+                    //patient.Doctor = DoctorInfo(patientDTO.Doctor_Id);
 
                     unitOfWork.PatientRepository.Update(patient);
                     unitOfWork.Save();
@@ -101,7 +117,7 @@ namespace ApplicationService.Implementations
 
         public bool Save(PatientDTO patientDTO)
         {
-            if(!DoctorCheck(patientDTO.Doctor_Id)) 
+            if (!DoctorCheck(patientDTO.Doctor_Id))
             {
                 return false;
             }
@@ -113,6 +129,7 @@ namespace ApplicationService.Implementations
                 Age = patientDTO.Age,
                 PhoneNumber = patientDTO.PhoneNumber,
                 Doctor_Id = patientDTO.Doctor_Id,
+               // Doctor = DoctorInfo(patientDTO.Doctor_Id)
             };
 
             try
@@ -152,11 +169,11 @@ namespace ApplicationService.Implementations
 
             try
             {
-                using(UnitOfWork unitOfWork = new UnitOfWork())
+                using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
 
                     Doctor doctor = unitOfWork.DoctorRepository.GetByID(id);
-                    if(doctor == null)
+                    if (doctor == null)
                     {
                         return false;
                     }
@@ -170,6 +187,28 @@ namespace ApplicationService.Implementations
             }
 
 
+        }
+
+        private Doctor DoctorInfo(int id)
+        {
+            try
+            {
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+
+                    Doctor doctor = unitOfWork.DoctorRepository.GetByID(id);
+                    if (doctor != null)
+                    {
+                        return doctor;
+                    }
+                    return null;
+
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
 
     }
