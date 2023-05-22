@@ -28,6 +28,7 @@ namespace ApplicationService.Implementations
                         LastName = item.LastName,
                         Age = item.Age,
                         PhoneNumber = item.PhoneNumber,
+                        Specialization = item.Specialization,
                         Hospital_Id = item.Hospital_Id
                     });
                 }
@@ -52,6 +53,7 @@ namespace ApplicationService.Implementations
                         LastName = doctor.LastName,
                         Age = doctor.Age,
                         PhoneNumber = doctor.PhoneNumber,
+                        Specialization = doctor.Specialization,
                         Hospital_Id = doctor.Hospital_Id
 
                     };
@@ -80,11 +82,12 @@ namespace ApplicationService.Implementations
                     {
                         return false;
                     }
-                        // Update the hospital entity with the new values
-                        doctor.FirstName = doctorDTO.FirstName;
+                    // Update the hospital entity with the new values
+                    doctor.FirstName = doctorDTO.FirstName;
                     doctor.LastName = doctorDTO.LastName;
                     doctor.Age = doctorDTO.Age;
                     doctor.PhoneNumber = doctorDTO.PhoneNumber;
+                    doctor.Specialization = doctorDTO.Specialization;
                     doctor.Hospital_Id = doctorDTO.Hospital_Id;
 
 
@@ -113,6 +116,7 @@ namespace ApplicationService.Implementations
                 LastName = doctorDTO.LastName,
                 Age = doctorDTO.Age,
                 PhoneNumber = doctorDTO.PhoneNumber,
+                Specialization = doctorDTO.Specialization,
                 Hospital_Id = doctorDTO.Hospital_Id
             };
 

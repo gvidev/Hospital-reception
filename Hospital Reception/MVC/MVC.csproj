@@ -189,6 +189,9 @@
     <Content Include="Views\Hospital\Details.cshtml" />
     <Content Include="Views\Hospital\Create.cshtml" />
     <Content Include="Views\Hospital\Edit.cshtml" />
+    <Content Include="Views\Doctor\Details.cshtml" />
+    <Content Include="Views\Doctor\Create.cshtml" />
+    <Content Include="Views\Doctor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
