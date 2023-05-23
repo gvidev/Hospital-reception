@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC.ViewModels.HospitalVM>
+﻿@model MVC.ViewModels.Hospital.IndexVM
 
 @{
     ViewBag.Title = "Index";
@@ -9,55 +9,75 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+<form class="d-flex mt-3" role="search" action="/Hospital/Index">
+    @Html.HiddenFor(m => m.Pager.ItemsPerPage)
+    @Html.TextBoxFor(m => m.Filter.HospitalName, new { placeholder = "Search by Hospital Name", @class = "form-control me-2" })
+    <button class="btn btn-outline-success" type="submit" value="Filter">Search</button>
+</form>
+
+<br />
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.HospitalName)
+            Hospital Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            Address
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AddressNumber)
+            Address Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
+            City
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactNumber)
+            Contact Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            Email
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.HospitalName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AddressNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HospitalName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+
 
 </table>
+
+<div class="row pager">
+    <div class="col-3">
+        @{
+            Html.RenderPartial("/Views/Partial/PagerPartial.cshtml", Model.Pager);
+        }
+    </div>
+</div>

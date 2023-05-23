@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using MVC.ViewModels.Patient;
 
 namespace MVC.Controllers
 {
@@ -16,7 +17,7 @@ namespace MVC.Controllers
         private readonly Uri _url = new Uri("https://localhost:44392/api/patient");
 
         // GET: Patient
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(IndexVM model)
         {
             using (var client = new HttpClient())
             {
@@ -33,7 +34,36 @@ namespace MVC.Controllers
                 string jsonString = await response.Content.ReadAsStringAsync();
                 var responseData =
                     JsonConvert.DeserializeObject<List<PatientVM>>(jsonString);
-                return View(responseData);
+
+
+                model.Pager = model.Pager ?? new PagerVM();
+
+                model.Pager.Page = model.Pager.Page <= 0
+                                            ? 1
+                                            : model.Pager.Page;
+
+                model.Pager.ItemsPerPage = model.Pager.ItemsPerPage <= 0
+                                            ? 12
+                                            : model.Pager.ItemsPerPage;
+
+
+                model.Filter = model.Filter ?? new FilterVM();
+
+
+                model.Pager.PagesCount = (int)Math.Ceiling(responseData.Where(u =>
+                string.IsNullOrEmpty(model.Filter.LastName) || u.LastName.Contains(model.Filter.LastName)).Count() / (double)model.Pager.ItemsPerPage);
+
+
+                model.Items = responseData
+                                        .OrderBy(i => i.Id)
+                                        .Where(u =>
+                                               string.IsNullOrEmpty(model.Filter.LastName) || u.LastName.Contains(model.Filter.LastName))
+                                        .Skip(model.Pager.ItemsPerPage * (model.Pager.Page - 1))
+                                        .Take(model.Pager.ItemsPerPage)
+                                        .ToList();
+
+
+                return View(model);
 
             }
         }

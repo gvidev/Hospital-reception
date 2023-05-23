@@ -1,10 +1,14 @@
-﻿using MVC.ViewModels;
+﻿using ApplicationService.DTOs;
+using MVC.ViewModels;
+using MVC.ViewModels.Hospital;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Security.Policy;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,8 +22,12 @@ namespace MVC.Controllers
         private readonly Uri _url = new Uri("https://localhost:44392/api/hospital");
 
         // GET: Hospital
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(IndexVM model)
         {
+            
+
+
+
             using (var client = new HttpClient())
             { 
                 client.BaseAddress = _url;
@@ -35,7 +43,36 @@ namespace MVC.Controllers
                 string jsonString = await response.Content.ReadAsStringAsync();
                 var responseData =
                     JsonConvert.DeserializeObject<List<HospitalVM>>(jsonString);
-                return View(responseData);
+
+
+
+                model.Pager = model.Pager ?? new PagerVM();
+
+                model.Pager.Page = model.Pager.Page <= 0
+                                            ? 1
+                                            : model.Pager.Page;
+
+                model.Pager.ItemsPerPage = model.Pager.ItemsPerPage <= 0
+                                            ? 12
+                                            : model.Pager.ItemsPerPage;
+
+
+                model.Filter = model.Filter ?? new FilterVM();
+
+
+                model.Pager.PagesCount = (int)Math.Ceiling(responseData.Where(u =>
+                string.IsNullOrEmpty(model.Filter.HospitalName) || u.HospitalName.Contains(model.Filter.HospitalName)).Count() / (double)model.Pager.ItemsPerPage);
+
+
+                model.Items =responseData
+                                        .OrderBy(i => i.Id)
+                                        .Where(u =>
+                                               string.IsNullOrEmpty(model.Filter.HospitalName) || u.HospitalName.Contains(model.Filter.HospitalName))
+                                        .Skip(model.Pager.ItemsPerPage * (model.Pager.Page - 1))
+                                        .Take(model.Pager.ItemsPerPage)
+                                        .ToList();
+
+                return View(model);
 
             }
         }
