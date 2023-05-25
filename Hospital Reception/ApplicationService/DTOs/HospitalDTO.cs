@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,6 +28,8 @@ namespace ApplicationService.DTOs
 
         [StringLength(60)]
         public string Email { get; set; }
+
+        public List<Doctor> Doctors { get; set; }
 
         //not implemented correctly yet
         public bool Validate()

@@ -44,8 +44,18 @@ namespace ApplicationService.Implementations
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 Doctor doctor = unitOfWork.DoctorRepository.GetByID(id);
+                List<Patient> patients = unitOfWork.PatientRepository.Get().ToList();
+                List<Patient> assignedPatients = new List<Patient>();
                 if (doctor != null)
                 {
+                    foreach(var item in patients)
+                    {
+                        if(item.Doctor_Id == doctor.Id )
+                        {
+                            assignedPatients.Add(item);
+                        }
+                    }
+
                     doctorDTO = new DoctorDTO
                     {
                         Id = doctor.Id,
@@ -54,7 +64,8 @@ namespace ApplicationService.Implementations
                         Age = doctor.Age,
                         PhoneNumber = doctor.PhoneNumber,
                         Specialization = doctor.Specialization,
-                        Hospital_Id = doctor.Hospital_Id
+                        Hospital_Id = doctor.Hospital_Id,
+                        Patients = assignedPatients
 
                     };
 

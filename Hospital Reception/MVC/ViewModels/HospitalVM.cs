@@ -34,6 +34,8 @@ namespace MVC.ViewModels
         [Required]
         public string Email { get; set; }
 
+        public List<Data.Entities.Doctor> Doctors { get; set; }
+
         public HospitalVM() { }
 
         public HospitalVM(HospitalDTO hospitalDTO)
@@ -45,6 +47,7 @@ namespace MVC.ViewModels
             City = hospitalDTO.City;
             ContactNumber = hospitalDTO.ContactNumber;
             Email = hospitalDTO.Email;
+            Doctors = hospitalDTO.Doctors;
         }
 
     }

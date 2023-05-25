@@ -33,6 +33,8 @@ namespace MVC.ViewModels
         [Required]
         public int Hospital_Id { get; set; }
 
+        public List<Data.Entities.Patient> Patients {get;set;}
+
         public DoctorVM() { }
 
         public DoctorVM(DoctorDTO doctorDTO)
@@ -44,6 +46,7 @@ namespace MVC.ViewModels
             Specialization = doctorDTO.Specialization;
             PhoneNumber = doctorDTO.PhoneNumber;
             Hospital_Id = doctorDTO.Hospital_Id;
+            Patients = doctorDTO.Patients;
         }
     }
 }

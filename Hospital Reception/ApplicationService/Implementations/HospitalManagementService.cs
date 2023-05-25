@@ -16,7 +16,7 @@ namespace ApplicationService.Implementations
         {
 
             List<HospitalDTO> hospitalsDTO = new List<HospitalDTO>();
-
+            
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 foreach (var item in unitOfWork.HospitalRepository.Get())
@@ -45,8 +45,19 @@ namespace ApplicationService.Implementations
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 Hospital hospital = unitOfWork.HospitalRepository.GetByID(id);
+                List<Doctor> doctors = unitOfWork.DoctorRepository.Get().ToList();
+                List<Doctor> assignedDoctors = new List<Doctor>();
                 if (hospital != null)
                 {
+
+                    foreach(var item in doctors)
+                    {
+                        if(item.Hospital_Id == hospital.Id)
+                        {
+                            assignedDoctors.Add(item);
+                        }
+                    }
+
                     hospitalDTO = new HospitalDTO
                     {
                         Id = hospital.Id,
@@ -55,7 +66,8 @@ namespace ApplicationService.Implementations
                         AddressNumber = hospital.AddressNumber,
                         City = hospital.City,
                         ContactNumber = hospital.ContactNumber,
-                        Email = hospital.Email
+                        Email = hospital.Email,
+                        Doctors = assignedDoctors
                     };
                 }
 

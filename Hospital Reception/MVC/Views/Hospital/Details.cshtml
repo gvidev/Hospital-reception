@@ -58,6 +58,17 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctors)
+        </dt>
+
+        @foreach (var item in Model.Doctors)
+        {
+            <h5>@item.FirstName @item.LastName</h5>
+            <hr />
+
+        }
+
     </dl>
 </div>
 <p>

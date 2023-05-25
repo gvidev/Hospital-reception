@@ -29,6 +29,8 @@ namespace ApplicationService.DTOs
         public int Hospital_Id { get; set; }
         public Hospital Hospital { get; set; }
 
+        public List<Patient> Patients { get; set; }
+
         //not implemented correctly yet
         public bool Validate()
         {
